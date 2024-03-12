@@ -1,6 +1,7 @@
 import operations.*;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,44 +14,100 @@ public class Main {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
+        NumberFormatter formatter = new NumberFormatter();
+        formatter.setValueClass(Integer.class);
+        formatter.setMinimum(0);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setAllowsInvalid(false);
+        formatter.setCommitsOnValidEdit(true);
+
+        //Text view
+        JFormattedTextField textField = new JFormattedTextField(formatter);
+        textField.setBounds(10,10,230, 50);
+        textField.setEditable(false);
+
         //Function
 
         //First column
         JButton sumButton = new SumButton();
+        sumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int currentValue = (int) textField.getValue();
+                textField.setValue(currentValue + "+");
+            }
+        });
+
         JButton subButton = new SubtractionButton();
-        JButton equalButton = new EqualsButton();
+        subButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "-");
+            }
+        });
+
+
         JButton multiButton = new MultiplicationButton();
+        multiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "*");
+            }
+        });
+
         JButton divideButton = new DivideButton();
+        divideButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "/");
+            }
+        });
 
         frame.add(sumButton);
         frame.add(subButton);
-        frame.add(equalButton);
         frame.add(multiButton);
         frame.add(divideButton);
 
         //Second column
+
         JButton percentButton = new PersentButton();
         JButton delOneButton = new DelOneButton();
         JButton delAllButton = new DelAllButton();
+        delAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textField.setValue(0);
+            }
+        });
         JButton lvlButton = new LvlButton();
+
+        JButton equalButton = new EqualsButton();
+        equalButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int currentValue = (int) textField.getValue();
+                textField.setValue(currentValue);
+            }
+        });
 
         frame.add(delOneButton);
         frame.add(delAllButton);
         frame.add(percentButton);
         frame.add(lvlButton);
+        frame.add(equalButton);
 
         //Numbers
-        JTextField textField = new JTextField();
-        textField.setBounds(10,10,230, 50);
-        textField.setEditable(false);
 
         JButton oneBut = new JButton("1");
         oneBut.setBounds(10,70,50, 50);
         oneBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String currentValue = textField.getText();
-                textField.setText(currentValue + "1");
+                int currentValue = (int) textField.getValue();
+                textField.setValue(currentValue + 1);
             }
         });
 
@@ -151,7 +208,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
                 if (currentValue.contains(".")){
-                    commaBut.addActionListener(t -> JOptionPane.showMessageDialog(null,"Хомик, яки курва файны"));
+                    JOptionPane.showMessageDialog(null, "Хомик! Алэ яки курва файны");
                 } else {
                     textField.setText(currentValue + ".");
                 }
