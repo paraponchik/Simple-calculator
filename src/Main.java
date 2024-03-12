@@ -49,30 +49,114 @@ public class Main {
         oneBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textField.setText("1");
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "1");
             }
         });
 
         JButton twoBut = new JButton("2");
         twoBut.setBounds(70,70,50, 50);
+        twoBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "2");
+            }
+        });
+
         JButton threeBut = new JButton("3");
         threeBut.setBounds(130,70,50, 50);
+        threeBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "3");
+            }
+        });
+
         JButton fourBut = new JButton("4");
         fourBut.setBounds(10,130,50, 50);
+        fourBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "4");
+            }
+        });
+
         JButton fifeBut = new JButton("5");
         fifeBut.setBounds(70,130,50, 50);
+        fifeBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "5");
+            }
+        });
+
         JButton sixBut = new JButton("6");
         sixBut.setBounds(130,130,50, 50);
+        sixBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "6");
+            }
+        });
+
         JButton sevenBut = new JButton("7");
         sevenBut.setBounds(10,190,50, 50);
+        sevenBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "7");
+            }
+        });
+
         JButton eightBut = new JButton("8");
         eightBut.setBounds(70,190,50, 50);
+        eightBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "8");
+            }
+        });
+
         JButton nineBut = new JButton("9");
         nineBut.setBounds(130,190,50, 50);
+        nineBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "9");
+            }
+        });
+
         JButton zeroBut = new JButton("0");
         zeroBut.setBounds(10,250,110, 50);
-        JButton commaBut = new JButton(",");
+        zeroBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "0");
+            }
+        });
+
+        JButton commaBut = new JButton(".");
         commaBut.setBounds(130,250,50, 50);
+        commaBut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                if (currentValue.contains(".")){
+                    commaBut.addActionListener(t -> JOptionPane.showMessageDialog(null,"Хомик, яки курва файны"));
+                } else {
+                    textField.setText(currentValue + ".");
+                }
+            }
+        });
 
         frame.add(textField);
         frame.add(oneBut);
