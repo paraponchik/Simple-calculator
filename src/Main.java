@@ -1,7 +1,9 @@
 import operations.*;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,15 +16,8 @@ public class Main {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
-        NumberFormatter formatter = new NumberFormatter();
-        formatter.setValueClass(Integer.class);
-        formatter.setMinimum(0);
-        formatter.setMaximum(Integer.MAX_VALUE);
-        formatter.setAllowsInvalid(false);
-        formatter.setCommitsOnValidEdit(true);
-
         //Text view
-        JFormattedTextField textField = new JFormattedTextField(formatter);
+        JTextField textField = new JTextField();
         textField.setBounds(10,10,230, 50);
         textField.setEditable(false);
 
@@ -33,8 +28,8 @@ public class Main {
         sumButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int currentValue = (int) textField.getValue();
-                textField.setValue(currentValue + "+");
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "+");
             }
         });
 
@@ -79,7 +74,7 @@ public class Main {
         delAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textField.setValue(0);
+                textField.setText("");
             }
         });
         JButton lvlButton = new LvlButton();
@@ -88,8 +83,18 @@ public class Main {
         equalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int currentValue = (int) textField.getValue();
-                textField.setValue(currentValue);
+                String expression = textField.getText();
+
+                ScriptEngineManager manager = new ScriptEngineManager();
+                ScriptEngine engine = manager.getEngineByName("JavaScript");
+
+                try {
+                    Object result = engine.eval(expression);
+                    String answer = result.toString();
+                    textField.setText(answer);
+                } catch (ScriptException exception){
+                    exception.printStackTrace();
+                }
             }
         });
 
@@ -106,8 +111,8 @@ public class Main {
         oneBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int currentValue = (int) textField.getValue();
-                textField.setValue(currentValue + 1);
+                String currentValue = textField.getText();
+                textField.setText(currentValue + 1);
             }
         });
 
@@ -117,7 +122,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "2");
+                textField.setText(currentValue + 2);
             }
         });
 
@@ -127,7 +132,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "3");
+                textField.setText(currentValue + 3);
             }
         });
 
@@ -137,7 +142,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "4");
+                textField.setText(currentValue + 4);
             }
         });
 
@@ -147,7 +152,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "5");
+                textField.setText(currentValue + 5);
             }
         });
 
@@ -157,7 +162,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "6");
+                textField.setText(currentValue + 6);
             }
         });
 
@@ -167,7 +172,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "7");
+                textField.setText(currentValue + 7);
             }
         });
 
@@ -177,7 +182,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "8");
+                textField.setText(currentValue + 8);
             }
         });
 
@@ -187,7 +192,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "9");
+                textField.setText(currentValue + 9);
             }
         });
 
@@ -197,7 +202,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
-                textField.setText(currentValue + "0");
+                textField.setText(currentValue + 0);
             }
         });
 
