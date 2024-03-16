@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
+
     public static void main(String[] args){
         JFrame frame = new JFrame("Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,55 +17,15 @@ public class Main {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
+        final int[] firstOfValue = {0};
+        final int[] secondOfValue = {0};
+
         //Text view
         JTextField textField = new JTextField();
         textField.setBounds(10,10,230, 50);
         textField.setEditable(false);
 
-        //Function
 
-        //First column
-        JButton sumButton = new SumButton();
-        sumButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String currentValue = textField.getText();
-                textField.setText(currentValue + "+");
-            }
-        });
-
-        JButton subButton = new SubtractionButton();
-        subButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String currentValue = textField.getText();
-                textField.setText(currentValue + "-");
-            }
-        });
-
-
-        JButton multiButton = new MultiplicationButton();
-        multiButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String currentValue = textField.getText();
-                textField.setText(currentValue + "*");
-            }
-        });
-
-        JButton divideButton = new DivideButton();
-        divideButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String currentValue = textField.getText();
-                textField.setText(currentValue + "/");
-            }
-        });
-
-        frame.add(sumButton);
-        frame.add(subButton);
-        frame.add(multiButton);
-        frame.add(divideButton);
 
         //Second column
 
@@ -113,6 +74,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
                 textField.setText(currentValue + 1);
+                firstOfValue[0] = 1;
             }
         });
 
@@ -123,6 +85,7 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 String currentValue = textField.getText();
                 textField.setText(currentValue + 2);
+                secondOfValue[0] = 2;
             }
         });
 
@@ -232,6 +195,50 @@ public class Main {
         frame.add(nineBut);
         frame.add(zeroBut);
         frame.add(commaBut);
+
+
+        //Function
+
+        //First column
+        JButton sumButton = new SumButton();
+        sumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(String.valueOf(firstOfValue[0] + secondOfValue[0]));
+            }
+        });
+
+        JButton subButton = new SubtractionButton();
+        subButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(String.valueOf(firstOfValue[0] - secondOfValue[0]));
+            }
+        });
+
+
+        JButton multiButton = new MultiplicationButton();
+        multiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "*");
+            }
+        });
+
+        JButton divideButton = new DivideButton();
+        divideButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String currentValue = textField.getText();
+                textField.setText(currentValue + "/");
+            }
+        });
+
+        frame.add(sumButton);
+        frame.add(subButton);
+        frame.add(multiButton);
+        frame.add(divideButton);
 
         frame.setVisible(true);
     }
